@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.navbar .logo {
+  height: 30px;
+}
+
+.navbar nav ul {
+  display: flex;
+  list-style-type: none;
+}
+
+.navbar nav ul li {
+  margin-left: 20px;
+}
+
+.navbar nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.navbar nav ul li a:hover {
+  color: #e50914;
+}
+
+.navbar .user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.main-banner {
+  position: relative;
+  height: 100vh;
+  background-color: transparent;
+}
+
+.main-banner .banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.main-banner .banner-info {
+  position: absolute;
+  bottom: 50px;
+  left: 30px;
+  color: white;
+  max-width: 600px;
+}
+
+.main-banner .banner-info h1 {
+  font-size: 4em;
+  font-weight: bold;
+}
+
+.main-banner .banner-info p {
+  font-size: 1.2em;
+  margin: 20px 0;
+  max-width: 500px;
+}
+
+.main-banner .banner-info button {
+  background-color: #e50914;
+  color: white;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.main-banner .banner-info button:hover {
+  background-color: #b20710;
+}
+
+.movie-row {
+  margin: 50px 0 50px 0;
+}
+
+.movie-row h2 {
+  color: white;
+  margin-left: 30px;
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.movie-list {
+  display: flex;
+  overflow-x: scroll;
+  padding-left: 30px;
+  scroll-behavior: smooth;
+}
+
+.movie-item {
+  margin-right: 20px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.movie-item:hover {
+  transform: scale(1.1);
+}
+
+.movie-item img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.movie-list::-webkit-scrollbar {
+  display: none;
+}
