@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Netflix</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <img src="./IMG/LOGO/LOGO1.png" alt="Logo Netflix" class="logo" />
+      <nav>
+        <ul>
+          <li><a href="#" class="nav-link">Início</a></li>
+          <li><a href="#">Séries</a></li>
+          <li><a href="#">Filmes</a></li>
+          <li><a href="#">Minha Lista</a></li>
+        </ul>
+      </nav>
+      <img src="./IMG/LOGO/LOGOUSUARIO.png" alt="User Icon" class="user-icon" />
+    </header>
+
+    <section class="main-banner">
+      <img src="./IMG/Banner.jpeg" alt="Banner" class="banner-image" />
+      <div class="banner-info">
+        <h1>Interestellar</h1>
+        <p>
+          As reservas naturais da Terra estão chegando ao fim e um grupo de
+          astronautas recebe a missão de verificar possíveis planetas para
+          receberem a população mundial, possibilitando a continuação da
+          espécie. Cooper é chamado para liderar o grupo e aceita a missão
+          sabendo que pode nunca mais ver os filhos. Ao lado de Brand, Jenkins e
+          Doyle, ele seguirá em busca de um novo lar.
+        </p>
+        <button id="watchButton">Assistir Trailer</button>
+      </div>
+    </section>
+
+    <div id="video-container" class="video-container" style="display: none">
+      <iframe
+        id="trailerPlayer"
+        width="100%"
+        height="100%"
+        src="https://www.youtube.com/embed/mbbPSq63yuM?autoplay=1&controls=1"
+        title="Trailer Interestelar"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      >
+      </iframe>
+
+      <button id="closeButton">Fechar</button>
+    </div>
+
+    <section class="movie-row">
+      <h2>Sessão Cult</h2>
+      <div class="movie-list">
+        <div class="movie-item">
+          <img src="./IMG/CARTAZ/CITYOFGOD.jpg" alt="Filme 1" />
+        </div>
+        <div class="movie-item">
+          <img src="./IMG/CARTAZ/HER.jpg" alt="Filme 2" />
+        </div>
+        <div class="movie-item">
+          <img src="./IMG/CARTAZ/seven.jpg" alt="Filme 3" />
+        </div>
+        <div class="movie-item">
+          <img src="./IMG/CARTAZ/OSINFILTRADOS.jpg" alt="Filme 4" />
+        </div>
+        <div class="movie-item">
+          <img src="./IMG/CARTAZ/OPREDESTINADO.jpg" alt="Filme 5" />
+        </div>
+        <div class="movie-item">
+          <img src="./IMG/CARTAZ/aindaestouaqui.jpg" alt="Filme 6" />
+        </div>
+        <div class="movie-item">
+          <img src="./IMG/CARTAZ/PARASITA.jpg" alt="Filme 7" />
+        </div>
+        <div class="movie-item">
+          <img src="./IMG/CARTAZ/INFILTRADOSNAKLAN.jpg" alt="Filme 8" />
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document
+        .getElementById("watchButton")
+        .addEventListener("click", function () {
+          var videoContainer = document.querySelector("#video-container");
+          videoContainer.style.display = "block";
+
+          document.getElementById("video-container").innerHTML = `
+          <iframe id="trailerPlayer"
+            width="100%" 
+            height="100%" 
+            src="https://www.youtube.com/embed/mbbPSq63yuM?autoplay=1&controls=1" 
+            title="Trailer Interestelar"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+          <button id="closeButton">Fechar</button>
+        `;
+
+          document
+            .getElementById("closeButton")
+            .addEventListener("click", closeVideo);
+
+          var trailerPlayer = document.getElementById("trailerPlayer");
+          if (trailerPlayer.requestFullscreen) {
+            trailerPlayer.requestFullscreen();
+          } else if (trailerPlayer.mozRequestFullScreen) {
+            trailerPlayer.mozRequestFullScreen();
+          } else if (trailerPlayer.webkitRequestFullscreen) {
+            trailerPlayer.webkitRequestFullscreen();
+          } else if (trailerPlayer.msRequestFullscreen) {
+            trailerPlayer.msRequestFullscreen();
+          }
+        });
+
+      function closeVideo() {
+        var videoContainer = document.querySelector("#video-container");
+
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+
+        videoContainer.style.display = "none";
+        videoContainer.innerHTML = "";
+      }
+    </script>
+    <footer>
+      &copy; Essa página foi feita apenas para estudo sem fins lucrativos, 2025
+    </footer>
+  </body>
+</html>
