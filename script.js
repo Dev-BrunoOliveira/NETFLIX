@@ -1,43 +1,36 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var moviePlayer = document.getElementById("moviePlayer");
-  moviePlayer.pause();
-});
+  const watchButton = document.getElementById("watchButton");
+  const videoContainer = document.getElementById("video-container");
 
-document.getElementById("watchButton").addEventListener("click", function () {
-  var videoContainer = document.querySelector("#video-container");
-  var moviePlayer = document.getElementById("moviePlayer");
+  if (watchButton && videoContainer) {
+    watchButton.addEventListener("click", function () {
+      videoContainer.style.display = "block";
 
-  videoContainer.style.display = "block";
+      videoContainer.innerHTML = `
+        <iframe id="trailerPlayer"
+                width="100%"
+                height="100%"
+                src="${getTrailerURL()}"
+                title="Trailer"
+                frameborder="0"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        <button id="closeButton">Fechar</button>
+      `;
 
-  if (moviePlayer.requestFullscreen) {
-    moviePlayer.requestFullscreen();
-  } else if (moviePlayer.mozRequestFullScreen) {
-    moviePlayer.mozRequestFullScreen();
-  } else if (moviePlayer.webkitRequestFullscreen) {
-    moviePlayer.webkitRequestFullscreen();
-  } else if (moviePlayer.msRequestFullscreen) {
-    moviePlayer.msRequestFullscreen();
+      document.getElementById("closeButton").addEventListener("click", function () {
+        videoContainer.style.display = "none";
+        videoContainer.innerHTML = ""; 
+      });
+    });
   }
 
-  moviePlayer.play();
-});
-
-function exitFullscreen() {
-  var moviePlayer = document.getElementById("moviePlayer");
-  if (document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if (document.webkitExitFullscreen) {
-    document.webkitExitFullscreen();
-  } else if (document.mozCancelFullScreen) {
-    document.mozCancelFullScreen();
-  } else if (document.msExitFullscreen) {
-    document.msExitFullscreen();
+  function getTrailerURL() {
+    
+    if (window.location.pathname.includes("series.html")) {
+      return "https://www.youtube.com/embed/b9EkMc79ZSU?controls=1"; 
+    } else {
+      return "https://www.youtube.com/embed/zSWdZVtXT7E?controls=1"; 
+    }
   }
-}
-
-document.getElementById("closeButton").addEventListener("click", function () {
-  exitFullscreen();
-
-  var videoContainer = document.querySelector("#video-container");
-  videoContainer.style.display = "none";
 });
