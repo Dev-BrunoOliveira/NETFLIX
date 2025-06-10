@@ -18,6 +18,16 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   }
+  const hamburger = document.querySelector(".hamburger-menu");
+  const navMenu = document.querySelector(".navbar nav");
+
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", function () {
+      hamburger.classList.toggle("active");
+
+      navMenu.classList.toggle("active");
+    });
+  }
 
   function getTrailerURL() {
     if (window.location.pathname.includes("series.html")) {

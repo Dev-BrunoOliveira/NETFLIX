@@ -6,11 +6,22 @@
     "Lucida Sans", Arial, sans-serif;
 }
 
+html,
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  touch-action: manipulation;
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   background-color: black;
   color: white;
 }
 
+/* --- BARRA DE NAVEGAÇÃO --- */
 .navbar {
   position: fixed;
   top: 0;
@@ -59,13 +70,23 @@ body {
   border-radius: 50%;
 }
 
-.toggle-menu {
+/* Esconde o ícone do menu em telas grandes */
+.hamburger-menu {
   display: none;
   cursor: pointer;
-  font-size: 1.5em;
-  color: white;
+  z-index: 1001; /* Garante que fique acima da navbar, mas abaixo do trailer */
 }
 
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: white;
+}
+
+/* --- BANNER PRINCIPAL --- */
 .main-banner {
   position: relative;
   height: 100vh;
@@ -111,32 +132,24 @@ body {
   background-color: #b20710;
 }
 
+/* --- LISTAS DE FILMES E SÉRIES --- */
 .movie-row {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   padding: 0 30px;
   margin-bottom: 40px;
-
-  display: flex;
-  flex-direction: column;
 }
 
 .movie-row h2 {
   color: white;
-  margin-left: 0;
   font-size: 2.5em;
   font-weight: bold;
   margin-bottom: 20px;
-  padding-left: 0;
 }
 
 .movie-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  cursor: default;
-  user-select: auto;
-  justify-content: center;
+  flex-wrap: wrap; /* Permite que os itens quebrem a linha */
+  gap: 10px; /* Espaçamento entre os itens */
+  justify-content: flex-start; /* Alinha os itens à esquerda */
 }
 
 .movie-list.active {
@@ -147,6 +160,7 @@ body {
   transition: transform 0.2s ease-in-out;
   flex-shrink: 0;
   cursor: pointer;
+  /* Layout para Desktop: 8 itens por linha */
   max-width: calc((100% / 8) - 10px);
   width: 200px;
 }
@@ -158,30 +172,76 @@ body {
 }
 
 .movie-item img {
-  width: 100%; 
-  height: 300px; 
-  object-fit: cover;
+  width: 100%;
+  height: 300px;
+  object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
   border-radius: 5px;
 }
 
-.movie-row::-webkit-scrollbar {
-  display: none;
+/* --- CONTAINER DO TRAILER --- */
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* CORREÇÃO: z-index alto para garantir que o trailer fique na frente de tudo */
+  z-index: 9999;
 }
 
+/* --- ESTILOS RESPONSIVOS --- */
 
 @media (max-width: 768px) {
-  .toggle-menu {
+  /* Mostra o menu hambúrguer */
+  .hamburger-menu {
     display: block;
+  }
+
+  /* Animação do ícone para "X" */
+  .hamburger-menu.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger-menu.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Esconde a navegação principal e a prepara para o modo mobile */
+  .navbar nav {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Mostra a navegação quando o menu está ativo */
+  .navbar nav.active {
+    display: flex;
   }
 
   .navbar nav ul {
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 0;
   }
 
   .navbar nav ul li {
-    margin: 10px 0;
+    margin: 20px 0;
+  }
+
+  .navbar nav ul li a {
+    font-size: 1.5em;
   }
 
   .main-banner .banner-info h1 {
@@ -200,91 +260,15 @@ body {
     font-size: 2em;
   }
 
-  .movie-item {
-    max-width: calc((100% / 4) - 10px);
-    width: 150px;
-  }
-
-  .movie-item img {
-    height: 225px;
-  }
-}
-
-.video-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.video-container video {
-  max-width: 90%;
-  max-height: 90%;
-}
-
-.video-container button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 10px;
-  background-color: red;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-footer {
-  width: 100%;
-  background-color: red;
-  padding: 5px;
-  text-align: center;
-}
-
-footer span {
-  color: #fff;
-  font-size: 0.8em;
-  font-weight: 500;
-}
-
-@media (max-width: 480px) {
-  .main-banner {
-    height: 60vh;
-  }
-
-  .main-banner .banner-info {
-    bottom: 10px;
-    left: 10px;
-  }
-
-  .main-banner .banner-info h1 {
-    font-size: 4vw;
-  }
-
-  .main-banner .banner-info p {
-    font-size: 2.5vw;
-  }
-
-  .movie-row {
-    padding: 0 10px;
-  }
-
+  /* CORREÇÃO: Pôsteres mais largos em tablets (3 por linha) */
   .movie-item {
     max-width: calc((100% / 3) - 10px);
-    width: 120px;
   }
 
   .movie-item img {
-    height: 180px;
+    height: 250px;
   }
-}
 
-@media (max-width: 768px) {
   .video-container video {
     max-width: 95%;
     max-height: 80%;
@@ -292,6 +276,15 @@ footer span {
 }
 
 @media (max-width: 480px) {
+  /* CORREÇÃO: Pôsteres ainda mais largos em celulares (2 por linha) */
+  .movie-item {
+    max-width: calc((100% / 2) - 10px);
+  }
+
+  .movie-item img {
+    height: 260px;
+  }
+
   .video-container video {
     max-width: 100%;
     max-height: 70%;
