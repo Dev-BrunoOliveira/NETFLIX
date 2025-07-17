@@ -35,7 +35,7 @@ body {
 }
 
 .navbar .logo {
-  height: 30px;
+  height: 50px;
 }
 
 .navbar nav {
@@ -60,7 +60,7 @@ body {
 }
 
 .navbar nav ul li a:hover {
-  color: #e50914;
+  color: #E8B31F;
 }
 
 .navbar .user-icon {
@@ -116,7 +116,7 @@ body {
 }
 
 .main-banner .banner-info button {
-  background-color: #e50914;
+  background-color: #E8B31F;;
   color: white;
   font-size: 1.2em;
   padding: 10px 20px;
@@ -126,7 +126,7 @@ body {
 }
 
 .main-banner .banner-info button:hover {
-  background-color: #b20710;
+  background-color: #E8B31F;;
 }
 
 .movie-row {
